@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3d-cube c помощью CSS</title>
+    <script>
+        function change() {
+          n=document.getElementById("range").value+"s"; 
+           document.getElementById("newspeed").innerHTML=n;
+            document.getElementById("cube").style.animationDuration=n;
+        }
+    </script>
+    
+    
+    <style>
+        @keyframes rotate {
+            100% {transform: rotateZ(360deg)}
+        }
+        body {
+            perspective: 1000px;
+            perspective-origin: right bottom;
+            
+        }
+
+        .cube,
+        .cube>div {
+            position:
+                absolute;
+            width: 10em;
+            height: 10em;
+            border: 2px dotted red;
+        }
+
+        .cube>div {
+            opacity: 0.7;
+        }
+
+        .cube {
+            top: 300px;
+            left: 300px;
+            transform: rotateZ(0deg);
+            transform-style: preserve-3d;
+            animation: rotate 5s infinite linear
+        }
+
+        .back {
+            background: green;
+            transform: translateZ(-5em)
+                /*с-двигаем заднюю стенку куба назад*/
+        }
+
+        .left {
+            background: yellow;
+            transform: rotateY(90deg) translateZ(-5em);
+        }
+
+            .right {
+                background: pink;
+                transform: rotateY(90deg) translateZ(5em);
+            }
+        
+        .front {
+            background: blue;
+            transform: translateZ(5em)
+        }
+        
+        .top {
+            background: silver;
+            transform: rotateX(90deg)
+            translateZ(5em);
+        }
+        
+        .bottom {
+            background: red;
+            transform: rotateX(90deg)
+            translateZ(-5em);
+        }
+        #speed0:checked ~ .cube {animation: none} /*подключили кнопку стоп к анимации куба*/
+        #speed2:checked ~ .cube {animation-duration: 1s} /*подключили кнопку быстро к анимации куба*/
+        
+    </style>
+</head>
+
+<body>
+   <input type="range" oninput="change()" min=0 max=20 value=5 id='range'> Скорость <span id="newspeed">5s</span> <br>
+   
+   <input type="radio" name=speed id="speed0"> <label for="speed0"> Стоп</label>
+   <input type="radio" name=speed id="speed1" checked> <label for="speed1"> Медленно</label> 
+   <input type="radio" name=speed id="speed2"> <label for="speed2"> Быстро</label>
+   
+   
+    <!--back - зад -->
+    <!--left - левый -->
+    <!--right - правый -->
+    <!--top - верх -->
+    <!--bottom - низ -->
+    <!--front - перед -->
+
+    <div class="cube" id="cube">
+        <div class="back"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="front"></div>
+    </div>
+</body>
+
+</html>
